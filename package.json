@@ -1,0 +1,28 @@
+{
+  "name": "hw10-team-profile-generator",
+  "version": "1.0.0",
+  "description": "Homework 10",
+  "main": "index.js",
+  "directories": {
+    "test": "jest"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taylor25et/HW10-Team-Profile-Generator.git"
+  },
+  "author": "Taylor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taylor25et/HW10-Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/Taylor25et/HW10-Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
