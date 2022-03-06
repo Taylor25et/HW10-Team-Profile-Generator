@@ -5,9 +5,16 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+
+const render = require("./lib/htmlRenderer");
+
+const teamMembers = [];
+
+
 function start() {
   managerQuery();
 }
+
 // Array of questions for user input
 // Inputs manager name, id, email, and office number
 function managerQuery() {
@@ -52,11 +59,10 @@ function employeeQuery() {
         choices: ["Engineer", "Intern", "Finish Creating Team"],
       },
     ])
-    //this part might cause errors
-    .then(role => {
-      if (role === "Engineer") {
+    .then(val => {
+      if (val.role === "Engineer") {
         engineerQuery();
-      } else if (role === "Intern") {
+      } else if (val.role === "Intern") {
         internQuery();
       } else {
         createTeam();
@@ -128,6 +134,8 @@ function internQuery() {
     });
 }
 // Finishing Team creation & redirect to rendering
-function createTeam() {}
+function createTeam() {
+    if ()
+}
 
 start();
