@@ -35,7 +35,7 @@ function managerQuery() {
       },
     ])
     .then(val => {
-      const manager = newManager(val.name, val.id, val.email, val.officeNumber);
+      const manager = new Manager(val.name, val.id, val.email, val.officeNumber);
       console.log(manager);
       teamMembers.push(manager);
       employeeQuery();
@@ -89,7 +89,7 @@ function engineerQuery() {
       },
     ])
     .then(val => {
-      const engineer = newEngineer(val.name, val.id, val.email, val.github);
+      const engineer = new Engineer(val.name, val.id, val.email, val.github);
       console.log(engineer);
       teamMembers.push(engineer);
       employeeQuery();
@@ -121,7 +121,7 @@ function internQuery() {
       },
     ])
     .then(val => {
-      const intern = newIntern(val.name, val.id, val.email, val.school);
+      const intern = new Intern(val.name, val.id, val.email, val.school);
       console.log(intern);
       teamMembers.push(intern);
       employeeQuery();
