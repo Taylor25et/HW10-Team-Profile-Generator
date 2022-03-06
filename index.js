@@ -5,8 +5,10 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+const folderPath = path.resolve(__dirname,'dist')
+const filePath = path.join(folderPath, 'index.html')
 
-const render = require("./lib/htmlRenderer");
+const render = require("./src/htmlRenderer");
 
 const teamMembers = [];
 
@@ -43,7 +45,6 @@ function managerQuery() {
     ])
     .then(val => {
       const manager = new Manager(val.name, val.id, val.email, val.officeNumber);
-      console.log(manager);
       teamMembers.push(manager);
       employeeQuery();
     });
@@ -96,7 +97,6 @@ function engineerQuery() {
     ])
     .then(val => {
       const engineer = new Engineer(val.name, val.id, val.email, val.github);
-      console.log(engineer);
       teamMembers.push(engineer);
       employeeQuery();
     });
@@ -128,14 +128,13 @@ function internQuery() {
     ])
     .then(val => {
       const intern = new Intern(val.name, val.id, val.email, val.school);
-      console.log(intern);
       teamMembers.push(intern);
       employeeQuery();
     });
 }
 // Finishing Team creation & redirect to rendering
 function createTeam() {
-    if ()
+    fs.writeFileSync(filePath, render(teamMembers))
 }
 
 start();
