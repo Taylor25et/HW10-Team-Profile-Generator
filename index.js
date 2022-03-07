@@ -1,25 +1,28 @@
+// Pulling in my classes
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
+// Pulling in my helpers
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const folderPath = path.resolve(__dirname,'dist')
-const filePath = path.join(folderPath, 'index.html')
+// Creating links to output
+const folderPath = path.resolve(__dirname, "dist");
+const filePath = path.join(folderPath, "index.html");
 
+// Linking to my src
 const render = require("./src/htmlRenderer");
-
 const teamMembers = [];
 
-
 function start() {
-  managerQuery();
+  managerInput();
 }
 
 // Array of questions for user input
 // Inputs manager name, id, email, and office number
-function managerQuery() {
+function managerInput() {
   inquirer
     .prompt([
       {
@@ -43,14 +46,19 @@ function managerQuery() {
         message: "Enter team manager's office number:",
       },
     ])
-    .then(val => {
-      const manager = new Manager(val.name, val.id, val.email, val.officeNumber);
+    .then((data) => {
+      const manager = new Manager(
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
+      );
       teamMembers.push(manager);
-      employeeQuery();
+      employeeInput();
     });
 }
 // Selects the employee's role
-function employeeQuery() {
+function employeeInput() {
   inquirer
     .prompt([
       {
@@ -60,18 +68,18 @@ function employeeQuery() {
         choices: ["Engineer", "Intern", "Finish Creating Team"],
       },
     ])
-    .then(val => {
-      if (val.role === "Engineer") {
-        engineerQuery();
-      } else if (val.role === "Intern") {
-        internQuery();
+    .then((data) => {
+      if (data.role === "Engineer") {
+        engineerInput();
+      } else if (data.role === "Intern") {
+        internInput();
       } else {
         createTeam();
       }
     });
 }
 // Input Engineer info
-function engineerQuery() {
+function engineerInput() {
   inquirer
     .prompt([
       {
@@ -95,14 +103,19 @@ function engineerQuery() {
         message: "Enter new Engineer's GitHub username:",
       },
     ])
-    .then(val => {
-      const engineer = new Engineer(val.name, val.id, val.email, val.github);
+    .then((data) => {
+      const engineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.github
+      );
       teamMembers.push(engineer);
-      employeeQuery();
+      employeeInput();
     });
 }
 // Input Intern info
-function internQuery() {
+function internInput() {
   inquirer
     .prompt([
       {
@@ -126,15 +139,15 @@ function internQuery() {
         message: "Enter new Intern's school:",
       },
     ])
-    .then(val => {
-      const intern = new Intern(val.name, val.id, val.email, val.school);
+    .then((data) => {
+      const intern = new Intern(data.name, data.id, data.email, data.school);
       teamMembers.push(intern);
-      employeeQuery();
+      employeeInput();
     });
 }
 // Finishing Team creation & redirect to rendering
 function createTeam() {
-    fs.writeFileSync(filePath, render(teamMembers))
+  fs.writeFileSync(filePath, render(teamMembers));
 }
 
 start();
